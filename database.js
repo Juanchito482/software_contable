@@ -8,7 +8,7 @@ function convert(sql) {
     .replace(/\?/g, () => `$${++i}`)
     .replace(/datetime\('now','localtime'\)/gi, "to_char(CURRENT_TIMESTAMP, 'YYYY-MM-DD HH24:MI:SS')")
     .replace(/strftime\('%Y-%m',\s*'now'\)/gi, "to_char(CURRENT_TIMESTAMP, 'YYYY-MM')")
-    .replace(/strftime\('%Y-%m',\s*([a-z_]+)\)/gi, (_, c) => `to_char(${c.trim()}, 'YYYY-MM')`);
+    .replace(/strftime\('%Y-%m',\s*([a-z_]+)\)/gi, (_, c) => `to_char(${c.trim()}::date, 'YYYY-MM')`);
 }
 
 async function initialize() {
